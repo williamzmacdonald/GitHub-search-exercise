@@ -1,38 +1,31 @@
-import React, { useState } from 'react';
-import { TextField } from '@material-ui/core';
-import { Endpoints } from '@octokit/types';
-import { Octokit } from '@octokit/rest';
-
-type listSearchReposParameters = Endpoints['GET /search/repositories']['response'];
+import React from 'react';
+import { Select, TextField } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { fetchSearchResults, selectLoading } from '../store/searchResultsSlice'
+import SearchResults from './SearchResults';
+import './Search.css';
+import { useTypedSelector } from '../store/store';
 
 const Search = (): JSX.Element => {
-    const [searchResults, setSearcResults] = useState<listSearchReposParameters>();
-    const octokit = new Octokit();
+    const dispatch = useDispatch();
+    const searchStatus = useTypedSelector((state) => selectLoading(state)) ;
 
     const submitHandler = async (e: React.FormEvent) => {
-        // fetch some stuff
         e.preventDefault();
         const target = e.target as typeof e.target & {
             search: { value: string };
         };
-        // console.log(target.search.value);
-        const results = await octokit.request('GET /search/repositories', {
-            q: target.search.value,
-        });
-        setSearcResults(results);
+        dispatch(fetchSearchResults(target.search.value))
     };
 
-    const results = searchResults?.data.items.map(repo => (
-        <p key={repo.node_id}>{repo.name}</p>
-    ));
-
     return (
-        <>
-            <form onSubmit={submitHandler}>
+        <div className='searchContainer'>
+            <form onSubmit={submitHandler} className='searchForm'>
                 <TextField label='Search' name='search'/>
+                {/* <Select /> */}
             </form>
-            {results}
-        </>
+            {searchStatus === 'idle' ? <SearchResults /> : null}
+        </div>
     );
 }
 
