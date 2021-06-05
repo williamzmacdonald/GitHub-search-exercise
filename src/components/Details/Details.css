@@ -1,9 +1,13 @@
 .details {
-    margin: 1rem;
-    padding: 1rem;
-    overflow: auto;
+    height: auto;
+    width: 80%;
+    max-width: 1000px;
+    margin: 2rem;
 }
 
-.tableContainer {
-    min-width: 400px;
+@media only screen and (max-width: 600px) {
+    .details {
+        width: 100%;
+        margin: 0;
+    }
 }

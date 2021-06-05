@@ -13,22 +13,28 @@ const Details = (): JSX.Element => {
 
     return (
         <div className='details'>
-            <TableContainer component={Paper} className='tableContainer'>
-                <Table className='table'>
+            <TableContainer component={Paper}>
+                <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell>Name</TableCell>
-                            <TableCell align='right'>Description</TableCell>
-                            <TableCell align='right'>Stars</TableCell>
-                            <TableCell align='right'>Language</TableCell>
-                            <TableCell align='right'>Owner Name</TableCell>
+                            <TableCell>{searchResult.name}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>{searchResult.name}</TableCell>
-                            <TableCell align='right'>{searchResult.description}</TableCell>
-                            <TableCell align='right'>{searchResult.stargazers_count}</TableCell>
-                            <TableCell align='right'>{searchResult.language}</TableCell>
-                            <TableCell align='right'>{searchResult.owner.login}</TableCell>
+                            <TableCell>Description</TableCell>
+                            <TableCell>{searchResult.description}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>Stars</TableCell>
+                            <TableCell>{searchResult.stargazers_count}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>Language</TableCell>
+                            <TableCell>{searchResult.language}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>Owner Name</TableCell>
+                            <TableCell>{searchResult.owner.login}</TableCell>
                         </TableRow>
                     </TableHead>
                 </Table>

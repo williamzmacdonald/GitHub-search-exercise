@@ -42,19 +42,23 @@ const Search = (): JSX.Element => {
     return (
         <div className='searchContainer'>
             <form onSubmit={submitHandler} className='searchForm'>
-                <TextField
-                    label='Search'
-                    name='search'
-                    value={searchText}
-                    onChange={handleSearchTextChange}
-                />
-                <TextField
-                    label='Language Filter'
-                    name='languageFilter'
-                    value={languageFilter}
-                    onChange={handleLanguageChange}
-                />
-                <div>
+                <div className='formItem'>
+                    <TextField
+                        label='Search'
+                        name='search'
+                        value={searchText}
+                        onChange={handleSearchTextChange}
+                    />
+                </div>
+                <div className='formItem'>
+                    <TextField
+                        label='Language Filter'
+                        name='languageFilter'
+                        value={languageFilter}
+                        onChange={handleLanguageChange}
+                    />
+                </div>
+                <div className='formItem'>
                     <InputLabel id='sortByLabel'>Sort By...</InputLabel>
                     <Select
                         labelId='sortByLabel'
@@ -67,9 +71,13 @@ const Search = (): JSX.Element => {
                         <MenuItem value='stars'>Stars</MenuItem>
                     </Select>
                 </div>
-                <Button type='submit'>Submit</Button>
+                <div className='formItem'>
+                    <Button type='submit' variant='outlined'>Submit</Button>
+                </div>
             </form>
-            <SearchResults />
+            <div className='resultsContainer'>
+                <SearchResults />
+            </div>
         </div>
     );
 }
