@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { Button, CircularProgress, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
+import { Button, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { fetchSearchResults, selectLoading } from '../store/searchResultsSlice'
-import SearchResults from './SearchResults';
+import { fetchSearchResults } from '../../store/searchResults/searchResultsSlice'
+import SearchResults from '../SearchResults/SearchResults';
 import './Search.css';
-import { useTypedSelector } from '../store/store';
-
-const languages = ['JavaScript', 'TypeScript', 'Java'];
 
 const Search = (): JSX.Element => {
     const [searchText, setSearchText] = useState('');
@@ -14,10 +11,11 @@ const Search = (): JSX.Element => {
     const [sortBy, setSortBy] = useState('');
 
     const dispatch = useDispatch();
-    const searchStatus = useTypedSelector((state) => selectLoading(state));
 
     const submitHandler = async (e: React.FormEvent) => {
         e.preventDefault();
+        // Build our query string using our searchText, and optionally add the language filter
+        // and sort arguments
         let queryString = searchText;
         if (languageFilter) {
             queryString += ` language:${languageFilter}`;
@@ -25,6 +23,7 @@ const Search = (): JSX.Element => {
         if (sortBy) {
             queryString += ` sort:${sortBy}`
         }
+        // Dispatch our async thunk, fetchSearchResults
         dispatch(fetchSearchResults(queryString));
     };
 
@@ -32,18 +31,13 @@ const Search = (): JSX.Element => {
         setSearchText(event.target.value);
     };
 
-    const handleLanguageChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setLanguageFilter(event.target.value as string);
+    const handleLanguageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setLanguageFilter(event.target.value);
     };
 
     const handleSortChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         setSortBy(event.target.value as string);
     };
-
-    const menuItems = languages.map(language => (
-        <MenuItem value={language} key={language}>{language}</MenuItem>
-    ));
-    menuItems.push(<MenuItem value='' key='none'>None</MenuItem>);
 
     return (
         <div className='searchContainer'>
@@ -54,18 +48,12 @@ const Search = (): JSX.Element => {
                     value={searchText}
                     onChange={handleSearchTextChange}
                 />
-                <div>
-                    <InputLabel id='languageSelectLabel'>Language Filter</InputLabel>
-                    <Select
-                        labelId='languageSelectLabel'
-                        id='languageSelect'
-                        value={languageFilter}
-                        onChange={handleLanguageChange}
-                        displayEmpty
-                    >
-                        {menuItems}
-                    </Select>
-                </div>
+                <TextField
+                    label='Language Filter'
+                    name='languageFilter'
+                    value={languageFilter}
+                    onChange={handleLanguageChange}
+                />
                 <div>
                     <InputLabel id='sortByLabel'>Sort By...</InputLabel>
                     <Select
@@ -81,10 +69,7 @@ const Search = (): JSX.Element => {
                 </div>
                 <Button type='submit'>Submit</Button>
             </form>
-            {searchStatus === 'idle' ? <SearchResults /> :
-            <div className='progress'>
-                <CircularProgress size={100} />
-            </div>}
+            <SearchResults />
         </div>
     );
 }

@@ -1,0 +1,9 @@
+.details {
+    margin: 1rem;
+    padding: 1rem;
+    overflow: auto;
+}
+
+.tableContainer {
+    min-width: 400px;
+}

@@ -1,0 +1,9 @@
+.error {
+    color: orangered;
+    font-weight: bold;
+}
+
+.progress {
+    display: flex;
+    justify-content: center;
+}

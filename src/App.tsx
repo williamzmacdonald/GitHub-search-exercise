@@ -3,14 +3,14 @@ import {
     Switch,
     Route
 } from 'react-router-dom'
-import Details from './components/Details'
-import Search from './components/Search'
+import Details from './components/Details/Details'
+import Search from './components/Search/Search'
 
 function App (): JSX.Element {
     return (
         <Router>
             <Switch>
-                <Route path="/:id">
+                <Route path="/details">
                     <Details />
                 </Route>
                 <Route path="/">

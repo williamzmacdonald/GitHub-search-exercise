@@ -1,16 +1,11 @@
 .searchContainer {
-    padding: 2vh 2vw;
+    padding: 1rem;
     height: 400px;
     width: 600px;
 }
 
 .searchForm {
-    margin-bottom: 2vh;
+    margin-bottom: 1rem;
     display: flex;
     justify-content: space-around;
-}
-
-.progress {
-    display: flex;
-    justify-content: center;
 }
