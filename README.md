@@ -29,4 +29,4 @@ To launch the test runner use the following script:
 ## Dev Libraries
 [eslint](https://eslint.org/) Pluggable JavaScript linter\
 [msw](https://mswjs.io/) Mock APIs by intercepting requests on the network level\
-[gh-pages](https://pages.github.com/) Websites hosted directly from a GitHub repository\
+[gh-pages](https://pages.github.com/) Websites hosted directly from a GitHub repository
