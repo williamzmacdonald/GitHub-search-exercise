@@ -11,3 +11,7 @@
 .searchResults {
     min-width: 360px;
 }
+
+.MuiDataGrid-row:hover {
+    cursor: pointer;
+}

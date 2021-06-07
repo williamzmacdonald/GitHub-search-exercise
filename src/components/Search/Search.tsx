@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { fetchSearchResults } from '../../store/searchResults/searchResultsSlice'
+import { fetchSearchResults, setError } from '../../store/searchResults/searchResultsSlice'
 import SearchResults from './SearchResults/SearchResults';
 import './Search.css';
 
@@ -19,6 +19,10 @@ const Search = (): JSX.Element => {
 
     const submitHandler = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (searchText === '') {
+            dispatch(setError('Search field cannot be empty.'));
+            return;
+        }
         // Build our query string using our searchText, and optionally add the language filter
         // and sort arguments
         let queryString = searchText;
@@ -33,7 +37,9 @@ const Search = (): JSX.Element => {
     };
 
     const handleSearchTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchText(event.target.value);
+        if (event.target.value.length <= 256) {
+            setSearchText(event.target.value);
+        }
     };
 
     const handleLanguageChange = (event: React.ChangeEvent<HTMLInputElement>) => {

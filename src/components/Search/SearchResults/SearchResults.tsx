@@ -38,7 +38,7 @@ const SearchResults = (): JSX.Element => {
     // Select the row's id, then navigate to the details page
     const rowClickHandler = (param: GridRowParams) => {
         dispatch(select(param.id as number));
-        history.push('/details');
+        history.push(`${history.location.pathname}/details`);
     };
 
     if (searchStatus === 'loading') {
@@ -58,6 +58,7 @@ const SearchResults = (): JSX.Element => {
                 pageSize={30}
                 autoHeight
                 onRowClick={rowClickHandler}
+                hideFooterPagination
             />
         </div>
         

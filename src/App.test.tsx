@@ -4,7 +4,7 @@ import { setupServer } from 'msw/node';
 import '@testing-library/jest-dom/extend-expect';
 import App from './App';
 import { RenderWithProvider } from './test-utils/RenderWithProvider';
-import { history } from './history';
+import { history, URLs } from './history';
 import { RenderWithRouter } from './test-utils/RenderWithRouter';
 
 const url = 'https://api.github.com/search/repositories';
@@ -40,7 +40,7 @@ beforeAll(() => server.listen());
 
 // rerender, while wrapping 
 beforeEach(() => {
-    history.push('/');
+    history.push(URLs.base);
 });
 
 // reset any request handlers that were set after each test
@@ -68,7 +68,7 @@ test('submitting our form should load results that route us to the details scree
     expect(repoNameCell).toBeInTheDocument();
     // It should route to details when clicked
     fireEvent.click(repoNameCell);
-    await waitFor(() => expect(history.location.pathname).toBe('/details'));
+    await waitFor(() => expect(history.location.pathname).toBe(URLs.details));
     await waitFor(() => expect(screen.getByText(/This is a dungeon hud/i)).toBeInTheDocument());
 });
 

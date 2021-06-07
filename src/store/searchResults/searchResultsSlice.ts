@@ -27,6 +27,7 @@ const initialState: SearchResultsState = {
     selected: undefined,
 }
 
+
 // Create an async thunk to query our search results, and automatically
 // dispatch our fulfilled, pending, and rejected actions
 export const fetchSearchResults = createAsyncThunk<
@@ -53,6 +54,9 @@ export const searchResultsSlice = createSlice({
         select: (state, action: PayloadAction<number>) => {
             state.selected = action.payload;
         },
+        setError: (state, action: PayloadAction<string | null>) => {
+            state.error = action.payload;
+        },
     },
     // Our extraReducers will handle our fetchSearchResults automatically dispatched actions
     extraReducers: (builder) => {
@@ -65,19 +69,34 @@ export const searchResultsSlice = createSlice({
             state.loading = 'idle';
         });
         builder.addCase(fetchSearchResults.rejected, (state, action) => {
-            state.error = action.error.message ?? null;
+            let errorMessage = 'Something went wrong.';
+            if (action.error.message && action.error.message.includes('API rate limit')) {
+                errorMessage = 'too many searches!';
+            }
+            state.error = errorMessage;
             state.results = [];
             state.loading = 'idle';
         });    
     },
 })
 
-export const { select } = searchResultsSlice.actions;
+export const { select, setError } = searchResultsSlice.actions;
 
-// Export our state selectors
+/**
+ * Returns the searchResults' loading state.
+ */
 export const selectLoading = (state: RootState): LoadingStatus => state.searchResults.loading;
+/**
+ * Returns the searchResults' error state.
+ */
 export const selectError = (state: RootState): string | null => state.searchResults.error;
+/**
+ * Returns the searchResults.
+ */
 export const selectResults = (state: RootState): searchResults => state.searchResults.results;
+/**
+ * Returns the currently selected searchResult.
+ */
 export const selectResult = (state: RootState): searchResult | undefined => {
     return state.searchResults.results.find(result => result.id === state.searchResults.selected);
 };

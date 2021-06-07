@@ -13,4 +13,7 @@ export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {searchResults: SearchResults}
 export type AppDispatch = typeof store.dispatch;
 
+/**
+ * Exports the 'useSelector' hook with react-redux's TypedUseSelectorHook for simple reuse.
+ */
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
