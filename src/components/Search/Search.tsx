@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import { Button, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { fetchSearchResults } from '../../store/searchResults/searchResultsSlice'
-import SearchResults from '../SearchResults/SearchResults';
+import SearchResults from './SearchResults/SearchResults';
 import './Search.css';
+
+// Needed for TypeScript, allowing us to pass data-testid
+interface MySelectDisplayProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
+    'data-testid'?: string;
+}
 
 const Search = (): JSX.Element => {
     const [searchText, setSearchText] = useState('');
@@ -44,16 +49,16 @@ const Search = (): JSX.Element => {
             <form onSubmit={submitHandler} className='searchForm'>
                 <div className='formItem'>
                     <TextField
+                        id='label'
                         label='Search'
-                        name='search'
                         value={searchText}
                         onChange={handleSearchTextChange}
                     />
                 </div>
                 <div className='formItem'>
                     <TextField
+                        id='languageFilter'
                         label='Language Filter'
-                        name='languageFilter'
                         value={languageFilter}
                         onChange={handleLanguageChange}
                     />
@@ -66,6 +71,9 @@ const Search = (): JSX.Element => {
                         value={sortBy}
                         onChange={handleSortChange}
                         displayEmpty
+                        SelectDisplayProps={{
+                            'data-testid': 'sortBy'
+                        } as MySelectDisplayProps}
                     >
                         <MenuItem value=''>Best Match</MenuItem>
                         <MenuItem value='stars'>Stars</MenuItem>

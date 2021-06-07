@@ -3,8 +3,8 @@ import { DataGrid, GridColDef, GridRowParams } from '@material-ui/data-grid';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { select, selectError, selectLoading, selectResults } from '../../store/searchResults/searchResultsSlice';
-import { useTypedSelector } from '../../store/store';
+import { select, selectError, selectLoading, selectResults } from '../../../store/searchResults/searchResultsSlice';
+import { useTypedSelector } from '../../../store/store';
 import './SearchResults.css';
 
 const Star = () => <StarBorderIcon />;
@@ -51,7 +51,7 @@ const SearchResults = (): JSX.Element => {
 
     return (
         <div className='searchResults'>
-            {error ? <p className='error'>Failed to fetch repositories: {error}</p> : null}
+            {error ? <p className='error' role='alert'>Failed to fetch repositories: {error}</p> : null}
             <DataGrid
                 rows={rows}
                 columns={columns}

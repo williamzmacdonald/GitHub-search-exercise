@@ -6,8 +6,7 @@ import { Octokit } from '@octokit/rest';
 // The @octokit/types library allows us to build parameter/response data types for the REST API
 type searchReposData = Endpoints['GET /search/repositories']['response']['data'];
 type searchResults = searchReposData['items'];
-// Using type inference, we can extract a single instance of the searchResults type.
-type searchResult = searchResults extends (infer U)[] ? U : never;
+type searchResult = searchResults[number];
 
 // Build an octokit object, the official github API library
 const octokit = new Octokit();
