@@ -1,15 +1,32 @@
-## Available Scripts
+# GitHub Search Exercise
 
-In the project directory, you can run:
+This project is hosted on GitHub pages: [GitHub-search-exercise](https://williamzmacdonald.github.io/GitHub-search-exercise/)
+
+To get the project up and running, clone the repository and run the following scripts after navigating your terminal to the directory:
+
+### `npm install`
 
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000/GitHub-search-exercise](http://localhost:3000/GitHub-search-exercise) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To launch the test runner use the following script:
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
+## Primary Project Libraries
+
+[react](https://reactjs.org/) A JavaScript library for building user interfaces\
+[typescript](https://www.typescriptlang.org/) Typed JavaScript\
+[@material-ui](https://material-ui.com/) Popular component library\
+[react-redux](https://redux.js.org/) A predictable state container for JavaScript apps\
+[@reduxjs/toolkit](https://redux-toolkit.js.org/) Official toolkit for efficient Redux development\
+[react-router-dom](https://reactrouter.com/web/guides/quick-start) Standard routing library for React\
+[@testing-library](https://testing-library.com/) Simple and complete testing utilities that encourage good testing practices\
+[@octokit/rest](https://octokit.github.io/rest.js/v18) Official client for the GitHub API\
+
+## Dev Libraries
+[eslint](https://eslint.org/) Pluggable JavaScript linter\
+[msw](https://mswjs.io/) Mock APIs by intercepting requests on the network level\
+[gh-pages](https://pages.github.com/) Websites hosted directly from a GitHub repository\
