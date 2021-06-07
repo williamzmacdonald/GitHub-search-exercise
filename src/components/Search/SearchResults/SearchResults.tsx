@@ -3,6 +3,7 @@ import { DataGrid, GridColDef, GridRowParams } from '@material-ui/data-grid';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { URLs } from '../../../history';
 import { select, selectError, selectLoading, selectResults } from '../../../store/searchResults/searchResultsSlice';
 import { useTypedSelector } from '../../../store/store';
 import './SearchResults.css';
@@ -38,7 +39,7 @@ const SearchResults = (): JSX.Element => {
     // Select the row's id, then navigate to the details page
     const rowClickHandler = (param: GridRowParams) => {
         dispatch(select(param.id as number));
-        history.push(`${history.location.pathname}/details`);
+        history.push(URLs.details);
     };
 
     if (searchStatus === 'loading') {
